@@ -76,7 +76,7 @@ PhpMyAdmin é um serviço instalado juntamente ao Xampp, ele é responsável por
 
 Agora para criar o Banco de Dados basta seguir esse passo a passo:
 
-![Screenshot 2025-02-28 044933.png](images/image 1.png)
+![Screenshot 2025-02-28 044933.png](images/Screenshot_2025-02-28_044933.png)
 
 De um nome ao seu banco e em seguida crie as colunas com cada campo que armazenaram as informções inseridas pelos usuários (nome, rg, cpf, cep,etc). Crie tambem uma coluna chamada Id, para podermos fazer buscas mais rápidas pela tabela, apenas usando o id das colunas. Selecione o tipo de cada coluna de acordo com o valor a ser recebido por ela. E tambem ative o AUTO_INCREMENT para a coluna Id.
 
@@ -96,11 +96,11 @@ Nesta documentação usaremos o editor de texto Visual Studio Code.
 
 Configure seu painel de conexão com os seus dados.
 
-![image.png](images/image 1.png)
+![image.png](images/conectPanel.png)
 
 Para certificar que a conexão com seu DB esteja online, esta janela precisa aparecer:
 
-![image.png](images/image 2.png)
+![image.png](images/conect.png)
 
 Agora seu banco de dados esta totalmente conectado e pronto para ser manipulado em seu código.
 
