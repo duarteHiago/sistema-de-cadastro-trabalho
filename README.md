@@ -100,7 +100,7 @@ Configure seu painel de conexão com os seus dados.
 
 Para certificar que a conexão com seu DB esteja online, esta janela precisa aparecer:
 
-![image.png](image%202.png)
+![image.png](images/image 2.png)
 
 Agora seu banco de dados esta totalmente conectado e pronto para ser manipulado em seu código.
 
