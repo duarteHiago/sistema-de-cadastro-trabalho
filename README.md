@@ -76,7 +76,7 @@ PhpMyAdmin é um serviço instalado juntamente ao Xampp, ele é responsável por
 
 Agora para criar o Banco de Dados basta seguir esse passo a passo:
 
-![Screenshot 2025-02-28 044933.png](Screenshot_2025-02-28_044933.png)
+![Screenshot 2025-02-28 044933.png](images/Screenshot_2025-02-28_044933.png)
 
 De um nome ao seu banco e em seguida crie as colunas com cada campo que armazenaram as informções inseridas pelos usuários (nome, rg, cpf, cep,etc). Crie tambem uma coluna chamada Id, para podermos fazer buscas mais rápidas pela tabela, apenas usando o id das colunas. Selecione o tipo de cada coluna de acordo com o valor a ser recebido por ela. E tambem ative o AUTO_INCREMENT para a coluna Id.
 
