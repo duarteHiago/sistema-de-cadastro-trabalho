@@ -60,7 +60,7 @@ Execute o Xammp e siga os passos da instalação (Obs: Não se esqueça de autor
 
 Ao abri-lo inicie o servidor Apache e MySql, desta maneira:
 
-![image.png](image.png)
+![image.png](images/image.png)
 
 Caso ao iniciar o servidor MySql um erro surja, certifique-se que não há nenhum outro processo em andamento na sua máquina que esteja utilizando as portas de rede :3306 ou :3307. Para remediar basta encerrar o processo por meio do Gerenciador de Tarefas. Se o erro persistir, ou outro erro aparecer, procure ajuda no forum da comunidade do Xampp, segue o link: [Apache Friends Support Forum - Index page](https://community.apachefriends.org/f/).
 
