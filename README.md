@@ -96,7 +96,7 @@ Nesta documentação usaremos o editor de texto Visual Studio Code.
 
 Configure seu painel de conexão com os seus dados.
 
-![image.png](image%201.png)
+![image.png](images/image 1.png)
 
 Para certificar que a conexão com seu DB esteja online, esta janela precisa aparecer:
 
