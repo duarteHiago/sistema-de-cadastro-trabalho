@@ -1,0 +1,12 @@
+#container{
+    display: flexbox;
+    justify-content: space-between;
+    align-items: center;
+
+    top: 200px;
+    bottom: 200px;
+    left: 200px;
+    right: 200px;
+
+
+}
