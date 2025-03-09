@@ -105,3 +105,180 @@ Para certificar que a conexão com seu DB esteja online, esta janela precisa apa
 Agora seu banco de dados esta totalmente conectado e pronto para ser manipulado em seu código.
 
 ## 7 - Desenvolvimento do Software
+
+### 7.1 - Estrutura de Arquivos
+
+```bash
+/sistema_cadastro
+|-- index.php
+|-- config.php
+|-- style.css
+```
+
+### 7.2 - Configuração da Conexão de Banco de Dados (***config**.php*)
+
+```php
+<?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "sistema_cadastro";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);     
+
+    if ($conn->connect_error) {
+        die("Falha na Conexao ao DB...". $conn->connect_error);
+    }
+?>
+```
+
+### 7.3 - Cadastro do Usuário (*index.php*)
+
+- Configuração da Interação do DB com o HTML
+
+```php
+<?php
+// Inclui o arquivo de configuração para conectar ao banco de dados
+include('config.php');
+
+// Inicializa a variável de erro e sucesso
+$mensagem = "";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Recebe os dados do formulário
+    $nome = $_POST['nome'];
+    $rg = $_POST['rg'];
+    $cpf = $_POST['cpf'];
+    $cep = $_POST['cep'];
+
+    // Insere os dados no banco de dados
+    $sql = $conn->prepare("INSERT INTO alunos (nome, rg, cpf, cep) VALUES (?, ?, ?, ?)");
+    $sql->bind_param("ssss", $nome, $rg, $cpf, $cep);
+
+    // Verifica se a execução foi bem-sucedida
+    if ($sql->execute()) {
+        $mensagem = "Aluno cadastrado com sucesso!";
+    } else {
+        $mensagem = "Erro ao cadastrar aluno: " . $sql->error;
+    }
+
+    // Fecha a conexão preparada
+    $sql->close();
+}
+?>
+```
+
+- Configuração HTML
+
+```html
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+    <style>
+        /* Centralizar o conteúdo */
+        body {
+            display: flex;
+            flex-direction: column;  /* Organiza os elementos em coluna */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h2 {
+            margin-bottom: 20px;  /* Espaçamento entre o título e o formulário */
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 300px;
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .mensagem {
+            margin-top: 10px;
+            color: green;  /* Cor da mensagem de sucesso */
+        }
+
+        .erro {
+            color: red;  /* Cor da mensagem de erro */
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cadastro de Aluno</h2>
+
+    <form method="POST" action="">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required><br><br>
+
+        <label for="rg">RG:</label>
+        <input type="text" id="rg" name="rg" required><br><br>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required><br><br>
+
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" required><br><br>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+</body>
+</html>
+```
+
+### 7.4 - Configuração CSS (*style.css*)
+
+```css
+#container{
+    display: flexbox;
+    justify-content: space-between;
+    align-items: center;
+
+    top: 200px;
+    bottom: 200px;
+    left: 200px;
+    right: 200px;
+}
+```
+
+## 8 - Conclusão
+
+Este documento fornece um guia básico para configuração e execução da aplicação. Certifique-se de configurar corretamente o ambiente para evitar erros de conexão ao banco de dados.
+
+## 9 -Trabalho Acadêmico
+
+Este trabalho foi desenvolvido para a disciplina de Engenharia de Software, ministrada pelo professor Felipe, na Faculdade de Ciências da Computação. Aluno responsável: Hiago Duarte.
