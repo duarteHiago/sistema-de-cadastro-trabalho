@@ -1,7 +1,7 @@
 <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
+    $servername = "3.87.47.114";  // O IP público da instância EC2
+    $username = "hiago";
+    $password = "zqkwd10011";
     $dbname = "sistema_cadastro";
 
     $conn = new mysqli($servername, $username, $password, $dbname);     
