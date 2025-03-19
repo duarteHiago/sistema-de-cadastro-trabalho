@@ -1,6 +1,7 @@
 <?php
 // Inclui o arquivo de configuração para conectar ao banco de dados
 include('config.php');
+include('gerador_arquivos.php');
 
 // Inicializa a variável de erro e sucesso
 $mensagem = "";
