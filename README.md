@@ -519,10 +519,10 @@ if (isset($_GET['nome_busca'])) {
 </body>
 </html>
 ```
-### **8 - Conclusão**
+### **7 - Conclusão**
 
 Este documento fornece um guia básico para configuração e execução da aplicação. Certifique-se de configurar corretamente o ambiente para evitar erros de conexão ao banco de dados.
 
-### **9 -Trabalho Acadêmico**
+### **8 -Trabalho Acadêmico**
 
 Este trabalho foi desenvolvido para a disciplina de Engenharia de Software, ministrada pelo professor Felipe, na Faculdade de Ciências da Computação. Aluno responsável: Hiago Duarte.
