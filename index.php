@@ -1,7 +1,7 @@
 <?php
 // Inclui o arquivo de configuração para conectar ao banco de dados
 include('config.php');
-include('gerador_arquivo.php');
+include('gerador_de_arquivos.php');
 
 // Inicializa a variável de erro e sucesso
 $mensagem = "";
@@ -17,20 +17,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['buscar'])) {
     $endereco = $_POST['endereco'] ?? '';
     $telefone = $_POST['telefone'] ?? '';
 
-    // Insere os dados no banco de dados
-    $sql = $conn->prepare("INSERT INTO alunos (nome, rg, cpf, cep, matricula, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?, ?)");
-    $sql->bind_param("sssssss", $nome, $rg, $cpf, $cep, $matricula, $endereco, $telefone);
+    // Verifica se o CPF, matrícula, telefone, RG ou nome já existe no banco de dados
+    $sql_check = $conn->prepare("SELECT id FROM alunos WHERE cpf = ? OR matricula = ? OR telefone = ? OR rg = ? OR nome = ?");
+    $sql_check->bind_param("sssss", $cpf, $matricula, $telefone, $rg, $nome);
+    $sql_check->execute();
+    $result_check = $sql_check->get_result();
 
-    if ($sql->execute()) {
-        $mensagem = "Aluno cadastrado com sucesso!";
-        // Gera os arquivos JSON e XML após o cadastro
-        gerarJSON($conn);
-        gerarXML($conn);
+    if ($result_check->num_rows > 0) {
+        $mensagem = "Erro: Já existe um aluno cadastrado com este CPF, matrícula, telefone, RG ou nome.";
     } else {
-        $mensagem = "Erro ao cadastrar aluno: " . $sql->error;
+        // Insere os dados no banco de dados
+        $sql = $conn->prepare(query: "INSERT INTO alunos (nome, rg, cpf, cep, matricula, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $sql->bind_param("sssssss", $nome, $rg, $cpf, $cep, $matricula, $endereco, $telefone);
+
+        if ($sql->execute()) {
+            $mensagem = "Aluno cadastrado com sucesso!";
+            // Gera os arquivos JSON e XML após o cadastro
+            gerarJSON($conn);
+            gerarXML($conn);
+        } else {
+            $mensagem = "Erro ao cadastrar aluno: " . $sql->error;
+        }
+
+        $sql->close();
     }
 
-    $sql->close();
+    $sql_check->close();
 }
 
 if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['buscar'])) {
@@ -188,8 +200,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['buscar'])) {
         <button type="submit">Cadastrar</button>
     </form>
 
+    <!-- Alterar o formulário de busca -->
     <h2>Buscar Aluno</h2>
-    <form method="POST" action="">
+    <form method="GET" action="buscar_aluno.php">
         <label for="nome_busca">Nome:</label>
         <input type="text" id="nome_busca" name="nome_busca" required><br>
         <button type="submit" name="buscar">Buscar</button>
