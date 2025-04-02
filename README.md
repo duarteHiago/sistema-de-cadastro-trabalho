@@ -66,6 +66,7 @@ git clone <https://github.com/Astrinn/sistema-de-cadastro-trabalho>
 |-- config.php
 |-- gerador_arquivo.php
 |-- style.css
+|-- buscar_alunos.php
 ```
 
 ### 2- Arquivo HTML (index.php)
