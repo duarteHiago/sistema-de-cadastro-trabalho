@@ -1,0 +1,24 @@
+#container{
+    display: flexbox;
+    justify-content: space-between;
+    align-items: center;
+
+    top: 200px;
+    bottom: 200px;
+    left: 200px;
+    right: 200px;
+
+
+}
+.botoes-download {
+    position: fixed; /* Fixa os botões na tela */
+    top: 20px; /* Distância do canto superior */
+    left: 20px; /* Distância do canto esquerdo */
+    display: flex;
+    flex-direction: column; /* Botões em coluna */
+    gap: 10px; /* Espaço entre os botões */
+    z-index: 9999; /* Garante que os botões estejam acima de tudo */
+}
+
+
+
