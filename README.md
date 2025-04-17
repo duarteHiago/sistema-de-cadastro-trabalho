@@ -1,10 +1,12 @@
-# Documentação de Software: Sistema de Cadastro de Alunos
+# Documentação de Software: Sistema de Cadastro de Alunos v0.2
+
+Essa documentacao visa simular um ambiente real de desenvolvivemento, apenas destrinchando a arquitetura e tecnologias utilizadas. Se vc busca algo mais educativo e didatico, confira a documentacao da primeira versao desse projeto, la eu ensino a configurar todo seu ambiente de desenvolvimento, ensino tbm a baixar as dependencias do projeto. E tbm ajudo a resolver alguns erros que tive durante o meu desenvolvimento. Segue o link: https://drive.google.com/file/d/1PMe-fE-W-eCPLR81zp9xU1uH33yKP72x/view?usp=drive_link
 
 ## 1 - Visao Geral do Software
 
-  O Software de Cadastro de Alunos foi construido sob um ambiente web em um servidor Apache, desenvolvido em PHP, e estruturado em HTML e CSS. Sua finalidade é o cadastro de alunos de qualquer tipo instituição de ensino, desde escolas, universidades ou qualquer  vertente na área. Com campos preenchíveis para dados pessoais do aluno, para documentação do mesmo na instituição.
+O Software de Cadastro de Alunos foi construido sob um ambiente web em um servidor Apache, desenvolvido em PHP, e estruturado em HTML e CSS. Sua finalidade é o cadastro de alunos de qualquer tipo instituição de ensino, desde escolas, universidades ou qualquer  vertente na área. Com campos preenchíveis para dados pessoais do aluno, para documentação do mesmo na instituição.
 
-## 2 - Requisitos
+## 2 - Requisitos para Desenvolvimento
 
 - **Sistema Operacional**: Windows
 - **Navegador**: Chrome, Firefox, Edge
@@ -22,102 +24,305 @@ A arquitetura do sistema segue o padrão **MVC (Model-View-Controller)**, onde:
 
 O sistema foi desenvolvido utilizando as tecnologias:
 
-- **Backend**: PHP e Xampp
+- **Backend**: PHP
 - **Frontend**: HTML, CSS e PHP
 - **Banco de Dados**: MySql
 
 ## **4 - Como instalar?**
 
- Clone o repositório na sua máquina.
+Clone o repositório na sua máquina.
 
 ```bash
-git clone https://github.com/Astrinn/sistema-de-cadastro-trabalho
+git clone <https://github.com/Astrinn/sistema-de-cadastro-trabalho>
+
 ```
 
-Baixe o Xampp
-
-### Usando o **curl**:
-
-1. Abra o **Prompt de Comando** (CMD) no Windows.
-2. Execute o comando para baixar o XAMPP (exemplo de versão):
-    
-    ```bash
-    curl -L -o xampp-installer.exe https://www.apachefriends.org/xampp-files/8.1.6/xampp-windows-x64-8.1.6-0-VC15-installer.exe
-    ```
-    
-
-### Usando o **wget**:
-
-1. Caso tenha o **wget** instalado, use o comando abaixo:
+# Configuracao do Ambiente
 
 ```bash
-wget https://www.apachefriends.org/xampp-files/8.1.6/xampp-windows-x64-8.1.6-0-VC15-installer.exe
+📍 Ambiente Local (Desenvolvimento)
+   ├── Desenvolver e testar localmente 🔧
+   ├── Commitar alterações ✅
+   ▼  
+📍 Ambiente de Versionamento (GitHub)
+   ├── Push da branch para GitHub ⬆️
+   ├── Revisar e commitar na branch `main` 🔄
+   ├── Criar nova release (se necessário) 🏷️
+   ▼  
+📍 Ambiente Web (AWS)
+   ├── Atualizar código no servidor AWS ☁️
+   ├── Executar testes no ambiente web 🖥️
+   ├── Monitorar possíveis erros 🚨
+   ✔️ Projeto atualizado com sucesso!
 ```
 
-## 5.1- Configurar Banco de Dados
+# V0.2 (Implementacao de Sistema de Busca e Arquivos JSON e XML)
 
-Execute o Xammp e siga os passos da instalação (Obs: Não se esqueça de autorizar os recursos do Apache e do MySql).
+### 1- Estrutura de Arquivos
 
-Ao abri-lo inicie o servidor Apache e MySql, desta maneira:
-
-![image.png](images/image.png)
-
-Caso ao iniciar o servidor MySql um erro surja, certifique-se que não há nenhum outro processo em andamento na sua máquina que esteja utilizando as portas de rede :3306 ou :3307. Para remediar basta encerrar o processo por meio do Gerenciador de Tarefas. Se o erro persistir, ou outro erro aparecer, procure ajuda no forum da comunidade do Xampp, segue o link: [Apache Friends Support Forum - Index page](https://community.apachefriends.org/f/).
-
-### 5.2 - phpMyAdmin
-
-Apos a configuração do Xampp, abra o navegador de sua preferencia e digite na barra de URL:
-
-```bash
-//localhost/phpMyAdmin/
-```
-
-PhpMyAdmin é um serviço instalado juntamente ao Xampp, ele é responsável por toda configuração do banco de dados MySql. E é nele que faremos nossa conexão entre código e DB.
-
-Agora para criar o Banco de Dados basta seguir esse passo a passo:
-
-![Screenshot 2025-02-28 044933.png](images/Screenshot_2025-02-28_044933.png)
-
-De um nome ao seu banco e em seguida crie as colunas com cada campo que armazenaram as informções inseridas pelos usuários (nome, rg, cpf, cep,etc). Crie tambem uma coluna chamada Id, para podermos fazer buscas mais rápidas pela tabela, apenas usando o id das colunas. Selecione o tipo de cada coluna de acordo com o valor a ser recebido por ela. E tambem ative o AUTO_INCREMENT para a coluna Id.
-
-Assim seu DB esta praticamente configurado, agora vamos conecta-lo ao seu ambiente de desenvolvimento.
-
-## 6.1 - Ambiente de Desenvolvimento
-
-Nesta documentação usaremos o editor de texto Visual Studio Code. 
-
-### 6.2 - Dependencias VisualStudio Code
-
-- Extensão PHP Intellisense
-- Extensão SQLTolls
-- Extensão SQLTools MySql
-
-### 6.3 - Conexão com o Banco de Dados
-
-Configure seu painel de conexão com os seus dados.
-
-![image.png](images/conectPanel.png)
-
-Para certificar que a conexão com seu DB esteja online, esta janela precisa aparecer:
-
-![image.png](images/conect.png)
-
-Agora seu banco de dados esta totalmente conectado e pronto para ser manipulado em seu código.
-
-## 7 - Desenvolvimento do Software
-
-### 7.1 - Estrutura de Arquivos
-
-```bash
+```html
 /sistema_cadastro
 |-- index.php
 |-- config.php
+|-- gerador_arquivo.php
 |-- style.css
+|-- buscar_alunos.php
 ```
 
-### 7.2 - Configuração da Conexão de Banco de Dados (***config**.php*)
+### 2- Arquivo HTML (index.php)
 
-```php
+```html
+<?php
+// Inclui o arquivo de configuração para conectar ao banco de dados
+include('config.php');
+include('gerador_de_arquivos.php');
+
+// Inicializa a variável de erro e sucesso
+$mensagem = "";
+$dados_aluno = "";
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_POST['buscar'])) {
+    // Recebe os dados do formulário
+    $nome = $_POST['nome'] ?? '';
+    $rg = $_POST['rg'] ?? '';
+    $cpf = $_POST['cpf'] ?? '';
+    $cep = $_POST['cep'] ?? '';
+    $matricula = $_POST['matricula'] ?? '';
+    $endereco = $_POST['endereco'] ?? '';
+    $telefone = $_POST['telefone'] ?? '';
+
+    // Verifica se o CPF, matrícula, telefone, RG ou nome já existe no banco de dados
+    $sql_check = $conn->prepare("SELECT id FROM alunos WHERE cpf = ? OR matricula = ? OR telefone = ? OR rg = ? OR nome = ?");
+    $sql_check->bind_param("sssss", $cpf, $matricula, $telefone, $rg, $nome);
+    $sql_check->execute();
+    $result_check = $sql_check->get_result();
+
+    if ($result_check->num_rows > 0) {
+        $mensagem = "Erro: Já existe um aluno cadastrado com este CPF, matrícula, telefone, RG ou nome.";
+    } else {
+        // Insere os dados no banco de dados
+        $sql = $conn->prepare(query: "INSERT INTO alunos (nome, rg, cpf, cep, matricula, endereco, telefone) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $sql->bind_param("sssssss", $nome, $rg, $cpf, $cep, $matricula, $endereco, $telefone);
+
+        if ($sql->execute()) {
+            $mensagem = "Aluno cadastrado com sucesso!";
+            // Gera os arquivos JSON e XML após o cadastro
+            gerarJSON($conn);
+            gerarXML($conn);
+        } else {
+            $mensagem = "Erro ao cadastrar aluno: " . $sql->error;
+        }
+
+        $sql->close();
+    }
+
+    $sql_check->close();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['buscar'])) {
+    $nome_busca = $_POST['nome_busca'];
+    $nome_busca = strtolower($nome_busca);
+
+    $sql = $conn->prepare("SELECT * FROM alunos WHERE LOWER(nome) LIKE CONCAT(?, '%')");
+    $sql->bind_param('s', $nome_busca);
+    $sql->execute();
+
+    $result = $sql->get_result();
+    if ($result->num_rows > 0) {
+        $dados_aluno = $result->fetch_assoc();
+    } else {
+        $mensagem = "Aluno não encontrado!";
+    }
+    $sql->close();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Alunos</title>
+    <style>
+        /* Resetando margens e padding para evitar problemas com o layout */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Definindo o layout de 2 colunas */
+        form {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);  /* Duas colunas de largura igual */
+            gap: 15px;  /* Espaçamento entre os campos */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;  /* Tamanho máximo do formulário */
+            margin: 20px;
+        }
+
+        label {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        button {
+            grid-column: span 2;  /* O botão ocupa ambas as colunas */
+            padding: 10px 20px;
+            background-color: rgb(17, 0, 255);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: rgb(17, 0, 255);
+        }
+
+        .mensagem {
+            margin-top: 8px;
+            color: green;
+        }
+
+        .erro {
+            color: red;
+        }
+
+        /* Responsividade para telas pequenas */
+        @media (max-width: 768px) {
+            form {
+                grid-template-columns: 1fr;  /* Em telas pequenas, os campos ficam em uma coluna */
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            label {
+                font-size: 1.1em;
+            }
+
+            input {
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Cadastro de Aluno</h2>
+    <form method="POST" action="">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" name="nome" required>
+
+        <label for="rg">RG:</label>
+        <input type="text" id="rg" name="rg" required>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf" required>
+
+        <label for="cep">CEP:</label>
+        <input type="text" id="cep" name="cep" required>
+
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula" required>
+
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required>
+
+        <!-- Botão de envio -->
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <!-- Alterar o formulário de busca -->
+    <h2>Buscar Aluno</h2>
+    <form method="GET" action="buscar_aluno.php">
+        <label for="nome_busca">Nome:</label>
+        <input type="text" id="nome_busca" name="nome_busca" required><br>
+        <button type="submit" name="buscar">Buscar</button>
+    </form>
+
+    <?php if ($dados_aluno): ?>
+        <div class="resultado">
+            <h3>Dados do Aluno</h3>
+            <p><strong>Nome:</strong> <?php echo htmlspecialchars($dados_aluno['nome']); ?></p>
+            <p><strong>RG:</strong> <?php echo htmlspecialchars($dados_aluno['rg']); ?></p>
+            <p><strong>CPF:</strong> <?php echo htmlspecialchars($dados_aluno['cpf']); ?></p>
+            <p><strong>CEP:</strong> <?php echo htmlspecialchars($dados_aluno['cep']); ?></p>
+            <p><strong>Matrícula:</strong> <?php echo htmlspecialchars($dados_aluno['matricula']); ?></p>
+            <p><strong>Endereço:</strong> <?php echo htmlspecialchars($dados_aluno['endereco']); ?></p>
+            <p><strong>Telefone:</strong> <?php echo htmlspecialchars($dados_aluno['telefone']); ?></p>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($mensagem): ?>
+        <p class="<?php echo ($dados_aluno || strpos($mensagem, 'sucesso') !== false) ? 'mensagem' : 'erro'; ?>">
+            <?php echo $mensagem; ?>
+        </p>
+    <?php endif; ?>
+
+    <h2>Baixar Arquivos</h2>
+    <div class="botoes-download">
+        <a href="tabela.json" download="tabela.json">
+            <button>Baixar JSON</button>
+        </a>
+        <a href="tabela.xml" download="tabela.xml">
+            <button>Baixar XML</button>
+        </a>
+    </div>
+
+    <?php if ($mensagem): ?>
+        <p><?php echo $mensagem; ?></p>
+    <?php endif; ?>
+</body>
+</html>
+
+
+```
+
+### 3- **Configuração da Conexão de Banco de Dados (*config.php*)**
+
+```html
 <?php
     $servername = "localhost";
     $username = "root";
@@ -132,135 +337,7 @@ Agora seu banco de dados esta totalmente conectado e pronto para ser manipulado 
 ?>
 ```
 
-### 7.3 - Cadastro do Usuário (*index.php*)
-
-- Configuração da Interação do DB com o HTML
-
-```php
-<?php
-// Inclui o arquivo de configuração para conectar ao banco de dados
-include('config.php');
-
-// Inicializa a variável de erro e sucesso
-$mensagem = "";
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Recebe os dados do formulário
-    $nome = $_POST['nome'];
-    $rg = $_POST['rg'];
-    $cpf = $_POST['cpf'];
-    $cep = $_POST['cep'];
-
-    // Insere os dados no banco de dados
-    $sql = $conn->prepare("INSERT INTO alunos (nome, rg, cpf, cep) VALUES (?, ?, ?, ?)");
-    $sql->bind_param("ssss", $nome, $rg, $cpf, $cep);
-
-    // Verifica se a execução foi bem-sucedida
-    if ($sql->execute()) {
-        $mensagem = "Aluno cadastrado com sucesso!";
-    } else {
-        $mensagem = "Erro ao cadastrar aluno: " . $sql->error;
-    }
-
-    // Fecha a conexão preparada
-    $sql->close();
-}
-?>
-```
-
-- Configuração HTML
-
-```html
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Alunos</title>
-    <style>
-        /* Centralizar o conteúdo */
-        body {
-            display: flex;
-            flex-direction: column;  /* Organiza os elementos em coluna */
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        h2 {
-            margin-bottom: 20px;  /* Espaçamento entre o título e o formulário */
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 300px;
-        }
-
-        label {
-            margin-bottom: 5px;
-        }
-
-        input {
-            margin-bottom: 10px;
-            padding: 8px;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        .mensagem {
-            margin-top: 10px;
-            color: green;  /* Cor da mensagem de sucesso */
-        }
-
-        .erro {
-            color: red;  /* Cor da mensagem de erro */
-        }
-    </style>
-</head>
-<body>
-
-    <h2>Cadastro de Aluno</h2>
-
-    <form method="POST" action="">
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
-
-        <label for="rg">RG:</label>
-        <input type="text" id="rg" name="rg" required><br><br>
-
-        <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required><br><br>
-
-        <label for="cep">CEP:</label>
-        <input type="text" id="cep" name="cep" required><br><br>
-
-        <button type="submit">Cadastrar</button>
-    </form>
-</body>
-</html>
-```
-
-### 7.4 - Configuração CSS (*style.css*)
+### 4- **Configuração CSS (*style.css*)**
 
 ```css
 #container{
@@ -272,13 +349,181 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     bottom: 200px;
     left: 200px;
     right: 200px;
+
+}
+.botoes-download {
+    position: fixed; /* Fixa os botões na tela */
+    top: 20px; /* Distância do canto superior */
+    left: 20px; /* Distância do canto esquerdo */
+    display: flex;
+    flex-direction: column; /* Botões em coluna */
+    gap: 10px; /* Espaço entre os botões */
+    z-index: 9999; /* Garante que os botões estejam acima de tudo */
 }
 ```
 
-## 8 - Conclusão
+### 5- Arquivo de Geracao de XML e JSON (gerador_arquivo.php)
+
+```css
+<?php
+function gerarJSON($conn) {
+    // Consulta todos os registros da tabela 'alunos'
+    $sql = $conn->prepare("SELECT * FROM alunos");
+    $sql->execute();
+    $result = $sql->get_result();
+
+    // Transforma os resultados em um array associativo
+    $dados = [];
+    while ($row = $result->fetch_assoc()) {
+        $dados[] = $row;
+    }
+
+    // Salva os dados como JSON em um arquivo
+    file_put_contents("tabela.json", json_encode($dados, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    $sql->close();
+}
+
+function gerarXML($conn) {
+    // Consulta todos os registros da tabela 'alunos'
+    $sql = $conn->prepare("SELECT * FROM alunos");
+    $sql->execute();
+    $result = $sql->get_result();
+
+    // Cria a estrutura base do XML
+    $xml = new SimpleXMLElement('<Alunos/>');
+
+    // Adiciona os registros ao XML
+    while ($row = $result->fetch_assoc()) {
+        $aluno = $xml->addChild('Aluno');
+        foreach ($row as $key => $value) {
+            $aluno->addChild($key, htmlspecialchars($value));
+        }
+    }
+
+    // Salva os dados no arquivo XML
+    $xml->asXML("tabela.xml");
+    $sql->close();
+}
+?>
+
+```
+### 6- Arquivo para Busca de Alunos(buscar_alunos.php)
+
+```html
+<?php
+include('config.php');
+
+$mensagem = "";
+$dados_aluno = "";
+
+if (isset($_GET['nome_busca'])) {
+    $nome_busca = $_GET['nome_busca'];
+    $nome_busca = strtolower($nome_busca);
+
+    $sql = $conn->prepare("SELECT * FROM alunos WHERE LOWER(nome) LIKE CONCAT(?, '%')");
+    $sql->bind_param('s', $nome_busca);
+    $sql->execute();
+
+    $result = $sql->get_result();
+    if ($result->num_rows > 0) {
+        $dados_aluno = $result->fetch_assoc();
+    } else {
+        $mensagem = "Aluno não encontrado!";
+    }
+    $sql->close();
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado da Busca</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px auto;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .mensagem {
+            text-align: center;
+            color: red;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Resultado da Busca</h2>
+    <?php if ($dados_aluno): ?>
+        <table>
+            <tr>
+                <th>Campo</th>
+                <th>Valor</th>
+            </tr>
+            <tr>
+                <td>Nome</td>
+                <td><?php echo htmlspecialchars($dados_aluno['nome']); ?></td>
+            </tr>
+            <tr>
+                <td>RG</td>
+                <td><?php echo htmlspecialchars($dados_aluno['rg']); ?></td>
+            </tr>
+            <tr>
+                <td>CPF</td>
+                <td><?php echo htmlspecialchars($dados_aluno['cpf']); ?></td>
+            </tr>
+            <tr>
+                <td>CEP</td>
+                <td><?php echo htmlspecialchars($dados_aluno['cep']); ?></td>
+            </tr>
+            <tr>
+                <td>Matrícula</td>
+                <td><?php echo htmlspecialchars($dados_aluno['matricula']); ?></td>
+            </tr>
+            <tr>
+                <td>Endereço</td>
+                <td><?php echo htmlspecialchars($dados_aluno['endereco']); ?></td>
+            </tr>
+            <tr>
+                <td>Telefone</td>
+                <td><?php echo htmlspecialchars($dados_aluno['telefone']); ?></td>
+            </tr>
+        </table>
+    <?php else: ?>
+        <p class="mensagem"><?php echo $mensagem; ?></p>
+    <?php endif; ?>
+
+    <!-- Botão para voltar à página principal -->
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="index.php">
+            <button style="padding: 10px 20px; background-color: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 1em;">
+                Voltar à Página Principal
+            </button>
+        </a>
+    </div>
+</body>
+</html>
+```
+### **7 - Conclusão**
 
 Este documento fornece um guia básico para configuração e execução da aplicação. Certifique-se de configurar corretamente o ambiente para evitar erros de conexão ao banco de dados.
 
-## 9 -Trabalho Acadêmico
+### **8 -Trabalho Acadêmico**
 
 Este trabalho foi desenvolvido para a disciplina de Engenharia de Software, ministrada pelo professor Felipe, na Faculdade de Ciências da Computação. Aluno responsável: Hiago Duarte.

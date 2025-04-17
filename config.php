@@ -1,5 +1,5 @@
 <?php
-    $servername = "localhost";
+    $servername = "localhost";  // O IP público da instância EC2
     $username = "root";
     $password = "";
     $dbname = "sistema_cadastro";
